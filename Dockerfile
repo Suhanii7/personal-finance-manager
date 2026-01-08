@@ -2,6 +2,8 @@
 FROM gradle:8.5-jdk21 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
+# Fix permissions for gradlew
+RUN chmod +x gradlew
 RUN ./gradlew bootJar --no-daemon
 
 # Stage 2: Run the application
